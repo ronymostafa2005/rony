@@ -94,7 +94,7 @@ const Hero = () => {
           >
             <TypeAnimation
               sequence={[
-                'Front-End Developer',
+                'Front-End Engineer',
                 2000,
                 'React.js Specialist',
                 2000,
