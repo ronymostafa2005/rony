@@ -18,6 +18,22 @@ const Experience = () => {
 
   const experiences = [
     {
+company: 'GoStack Solution',
+position: 'Front-End Developer',
+period: '2026 · 6 Months',
+location: 'Cairo, Egypt',
+description: [
+'Developed and maintained multi-tenant web applications using modern front-end technologies',
+'Built cross-platform mobile applications using React Native',
+'Developed an LMS (Learning Management System) application for educational platforms',
+'Contributed to Nota, a legal services mobile application for lawyers',
+],
+tags: ['React.js', 'React Native', 'Next.js', 'TypeScript', 'Multi-Tenant'],
+color: 'from-cyan-500 to-blue-500',
+dotColor: '#06b6d4',
+},
+
+    {
       company: 'MDARJ',
       position: 'Front-End Developer',
       period: '2025 - Present',
