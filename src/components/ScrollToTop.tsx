@@ -34,8 +34,8 @@ const ScrollToTop = () => {
           whileTap={{ scale: 0.9 }}
           className="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-lg group overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, #6366f1, #a855f7)',
-            boxShadow: '0 4px 20px rgba(99, 102, 241, 0.4)',
+            background: 'linear-gradient(135deg, #14b8a6, #10b981)',
+            boxShadow: '0 4px 20px rgba(20, 184, 166, 0.4)',
           }}
           aria-label="Scroll to top"
         >

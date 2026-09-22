@@ -83,7 +83,7 @@ const LivePreview = ({ url, color }: { url: string; color: string }) => {
                 <motion.div
                   animate={{ rotate: 360 }}
                   transition={{ duration: 1.1, repeat: Infinity, ease: 'linear' }}
-                  className="w-8 h-8 rounded-full border-2 border-white/20 border-t-blue-400"
+                  className="w-8 h-8 rounded-full border-2 border-white/20 border-t-teal-400"
                 />
                 <span className="text-xs text-gray-400 font-mono">loading preview…</span>
               </>
@@ -98,7 +98,7 @@ const LivePreview = ({ url, color }: { url: string; color: string }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1.5"
+                  className="text-xs font-semibold text-teal-300 hover:text-teal-300 flex items-center gap-1.5"
                 >
                   Visit live site <FaExternalLinkAlt size={9} />
                 </a>
@@ -147,7 +147,7 @@ const ProjectCard = ({ project, index, isInView }: { project: Project; index: nu
         transition={{ duration: 0.3 }}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleLeave}
-        className="relative bg-slate-800/40 backdrop-blur-xl rounded-2xl overflow-hidden border border-slate-700/40 hover:border-blue-500/30 transition-colors duration-500 h-full flex flex-col"
+        className="relative bg-slate-800/40 backdrop-blur-xl rounded-2xl overflow-hidden border border-slate-700/40 hover:border-teal-500/30 transition-colors duration-500 h-full flex flex-col"
         style={{
           rotateX: tilt.rx,
           rotateY: tilt.ry,
@@ -184,7 +184,7 @@ const ProjectCard = ({ project, index, isInView }: { project: Project; index: nu
 
         {/* Content */}
         <div className="p-6 flex-1 flex flex-col">
-          <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-400 transition-colors duration-300">
+          <h3 className="text-lg font-bold text-white mb-2 group-hover:text-teal-300 transition-colors duration-300">
             {project.title}
           </h3>
 
@@ -195,7 +195,7 @@ const ProjectCard = ({ project, index, isInView }: { project: Project; index: nu
             {project.tags.slice(0, 4).map((tag, i) => (
               <span
                 key={i}
-                className="px-2.5 py-1 text-xs bg-slate-700/40 text-blue-300 rounded-lg border border-slate-600/30"
+                className="px-2.5 py-1 text-xs bg-slate-700/40 text-teal-300 rounded-lg border border-slate-600/30"
               >
                 {tag}
               </span>
@@ -213,7 +213,7 @@ const ProjectCard = ({ project, index, isInView }: { project: Project; index: nu
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Open ${project.title} live demo`}
-                className="flex items-center text-sm text-blue-400 hover:text-blue-300 transition-colors duration-300 gap-1.5"
+                className="flex items-center text-sm text-teal-300 hover:text-teal-300 transition-colors duration-300 gap-1.5"
               >
                 <FaExternalLinkAlt size={11} />
                 <span>Live Demo</span>
@@ -224,7 +224,7 @@ const ProjectCard = ({ project, index, isInView }: { project: Project; index: nu
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View ${project.title} source code`}
-              className="flex items-center text-sm text-purple-400 hover:text-purple-300 transition-colors duration-300 gap-1.5"
+              className="flex items-center text-sm text-emerald-300 hover:text-emerald-300 transition-colors duration-300 gap-1.5"
             >
               <FaGithub size={13} />
               <span>Code</span>
@@ -266,26 +266,37 @@ const Projects = () => {
 
   const projects: Project[] = [
     {
+      title: 'VENOM Agency',
+      description:
+        'Dark, bold creative agency website with immersive motion design, animated hero section, services showcase, gallery, and a multi-language (EN/AR) experience.',
+      tags: ['React.js', 'Framer Motion', 'Tailwind CSS', 'Animations', 'Responsive'],
+      gradient: 'from-slate-700 to-emerald-600',
+      category: 'Web Apps',
+      link: 'https://venom-website-tau.vercel.app/',
+      github: 'https://github.com/ronymostafa2005',
+      color: '#10b981',
+    },
+    {
       title: 'COZMATICS — Luxury Beauty',
       description:
         'Haute beauté & clean cosmetics brand site. Luxury e-commerce experience with refined typography, product storytelling, and a premium shopping journey.',
       tags: ['React.js', 'Next.js', 'Tailwind CSS', 'E-Commerce', 'Responsive'],
-      gradient: 'from-rose-500 to-pink-500',
+      gradient: 'from-teal-400 to-cyan-500',
       category: 'E-Commerce',
       link: 'https://cozmatics-luxury-beauty.vercel.app/',
       github: 'https://github.com/ronymostafa2005',
-      color: '#f43f5e',
+      color: '#2dd4bf',
     },
     {
       title: 'NOIR KITCHEN',
       description:
         'Chef-driven delivery brand — crafted behind the scenes, served with obsession. Signature menu, ordering flow, and a dark premium food experience.',
       tags: ['React.js', 'Next.js', 'Tailwind CSS', 'UI/UX', 'Responsive'],
-      gradient: 'from-amber-500 to-orange-600',
+      gradient: 'from-amber-400 to-teal-500',
       category: 'E-Commerce',
       link: 'https://cozmatics-luxury-beauty-h2sc.vercel.app/',
       github: 'https://github.com/ronymostafa2005',
-      color: '#f59e0b',
+      color: '#34d399',
     },
     {
       title: 'منصة الإسلام الشاملة',
@@ -296,40 +307,40 @@ const Projects = () => {
       category: 'Platforms',
       link: 'https://seraanabyy.vercel.app/',
       github: 'https://github.com/ronymostafa2005',
-      color: '#3b82f6',
+      color: '#14b8a6',
     },
     {
       title: 'Startup Packing',
       description:
         'Full-featured e-commerce platform for packaging and sweets. Includes secure payment gateway, real-time inventory management, and admin dashboard.',
       tags: ['React.js', 'Redux', 'Payment Gateway', 'Bootstrap', 'REST API'],
-      gradient: 'from-orange-500 to-red-500',
+      gradient: 'from-amber-400 to-emerald-500',
       category: 'E-Commerce',
       link: 'https://newstartup-qlxo.vercel.app/',
       github: 'https://github.com/ronymostafa2005',
-      color: '#f97316',
+      color: '#2dd4bf',
     },
     {
       title: 'Analytics Dashboard',
       description:
         'Comprehensive analytics dashboard with interactive charts, real-time data updates, and customizable widgets for data visualization.',
       tags: ['React.js', 'PrimeReact', 'Chart.js', 'Material-UI'],
-      gradient: 'from-indigo-500 to-purple-500',
+      gradient: 'from-cyan-500 to-teal-500',
       category: 'Dashboards',
       link: 'https://dashboard-2-gamma.vercel.app/dashboard',
       github: 'https://github.com/ronymostafa2005',
-      color: '#6366f1',
+      color: '#14b8a6',
     },
     {
       title: 'My Code Agency',
       description:
         'Modern agency website showcasing services, projects, and team. Responsive design with smooth animations and intuitive navigation.',
       tags: ['React.js', 'CSS3', 'Responsive Design', 'API Integration'],
-      gradient: 'from-purple-500 to-pink-500',
+      gradient: 'from-emerald-500 to-cyan-500',
       category: 'Web Apps',
       link: 'https://my-code-agency.netlify.app/',
       github: 'https://github.com/ronymostafa2005',
-      color: '#a855f7',
+      color: '#10b981',
     },
     {
       title: 'Ministry of Hajj Coordination',
@@ -347,11 +358,11 @@ const Projects = () => {
       description:
         'Web platform for chemical inventory management, usage tracking, and report generation with data visualization.',
       tags: ['React.js', 'Chart.js', 'Material-UI', 'Node.js'],
-      gradient: 'from-pink-500 to-rose-500',
+      gradient: 'from-cyan-500 to-emerald-500',
       category: 'Dashboards',
       link: '#',
       github: 'https://github.com/ronymostafa2005',
-      color: '#ec4899',
+      color: '#22d3ee',
     },
   ];
 
@@ -365,9 +376,9 @@ const Projects = () => {
   return (
     <section id="projects" className="py-24 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-      <div className="absolute top-40 left-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-40 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-500/20 to-transparent" />
+      <div className="absolute top-40 left-0 w-80 h-80 bg-teal-500/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-40 right-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         {/* Header */}
@@ -391,14 +402,14 @@ const Projects = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <TextDecode
               text="Featured Projects"
-              className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent"
+              className="bg-gradient-to-r from-teal-300 to-emerald-500 bg-clip-text text-transparent"
             />
           </h2>
           <motion.div
             initial={{ width: 0 }}
             animate={isInView ? { width: '5rem' } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"
+            className="h-1 bg-gradient-to-r from-teal-400 to-emerald-500 mx-auto rounded-full"
           />
         </motion.div>
 
@@ -417,11 +428,11 @@ const Projects = () => {
               whileTap={{ scale: 0.95 }}
               className={`relative px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 ${
                 activeFilter === filter
-                  ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
-                  : 'bg-slate-800/50 text-gray-400 hover:text-white border border-slate-700/50 hover:border-blue-500/30'
+                  ? 'bg-gradient-to-r from-teal-400 to-emerald-500 text-white shadow-lg'
+                  : 'bg-slate-800/50 text-gray-400 hover:text-white border border-slate-700/50 hover:border-teal-500/30'
               }`}
               style={
-                activeFilter === filter ? { boxShadow: '0 4px 20px rgba(99, 102, 241, 0.3)' } : {}
+                activeFilter === filter ? { boxShadow: '0 4px 20px rgba(20, 184, 166, 0.3)' } : {}
               }
             >
               {filter}
@@ -463,7 +474,7 @@ const Projects = () => {
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-slate-600 rounded-full text-gray-300 font-semibold hover:border-blue-500/50 hover:text-white transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-3.5 border-2 border-slate-600 rounded-full text-gray-300 font-semibold hover:border-teal-500/50 hover:text-white transition-all duration-300"
           >
             <FaGithub />
             View All Projects

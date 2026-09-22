@@ -32,7 +32,7 @@ const Preloader = () => {
           transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
           className="fixed inset-0 z-[9999] flex flex-col items-center justify-center overflow-hidden"
           style={{
-            background: 'linear-gradient(135deg, #0a0e1a 0%, #0f172a 40%, #1a1040 100%)',
+            background: 'linear-gradient(135deg, #0a0e1a 0%, #0f172a 40%, #07211c 100%)',
           }}
         >
           {/* Orbital Rings */}
@@ -44,7 +44,7 @@ const Preloader = () => {
                 style={{
                   width: size,
                   height: size,
-                  borderColor: `rgba(99, 102, 241, ${0.08 + i * 0.04})`,
+                  borderColor: `rgba(20, 184, 166, ${0.08 + i * 0.04})`,
                 }}
                 animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
                 transition={{
@@ -56,11 +56,11 @@ const Preloader = () => {
                 <motion.div
                   className="absolute w-2 h-2 rounded-full"
                   style={{
-                    background: `linear-gradient(135deg, #6366f1, #a855f7)`,
+                    background: `linear-gradient(135deg, #14b8a6, #10b981)`,
                     top: -4,
                     left: '50%',
                     marginLeft: -4,
-                    boxShadow: '0 0 12px rgba(99, 102, 241, 0.6)',
+                    boxShadow: '0 0 12px rgba(20, 184, 166, 0.6)',
                   }}
                   animate={{ scale: [1, 1.5, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
@@ -73,7 +73,7 @@ const Preloader = () => {
           <motion.div
             className="absolute w-96 h-96 rounded-full"
             style={{
-              background: 'radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(20, 184, 166, 0.12) 0%, transparent 70%)',
             }}
             animate={{
               scale: [1, 1.3, 1],
@@ -101,7 +101,7 @@ const Preloader = () => {
                 }}
                 className="text-5xl sm:text-7xl md:text-8xl font-black tracking-wider"
                 style={{
-                  background: 'linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%)',
+                  background: 'linear-gradient(135deg, #5eead4 0%, #6ee7b7 50%, #67e8f9 100%)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   textShadow: 'none',
@@ -128,7 +128,7 @@ const Preloader = () => {
               <motion.div
                 className="h-full rounded-full"
                 style={{
-                  background: 'linear-gradient(90deg, #6366f1, #a855f7, #ec4899)',
+                  background: 'linear-gradient(90deg, #14b8a6, #10b981, #22d3ee)',
                   width: `${progress}%`,
                 }}
                 transition={{ duration: 0.1 }}
@@ -149,7 +149,7 @@ const Preloader = () => {
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
-                className="w-1.5 h-1.5 rounded-full bg-indigo-500/40"
+                className="w-1.5 h-1.5 rounded-full bg-teal-500/40"
                 animate={{
                   scale: [1, 1.5, 1],
                   opacity: [0.4, 1, 0.4],

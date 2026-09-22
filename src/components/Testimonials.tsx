@@ -57,9 +57,9 @@ const Testimonials = () => {
 
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-purple-500/20 to-transparent" />
-      <div className="absolute top-24 left-1/4 w-72 h-72 bg-purple-500/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-24 right-1/4 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent" />
+      <div className="absolute top-24 left-1/4 w-72 h-72 bg-emerald-500/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-24 right-1/4 w-80 h-80 bg-teal-500/5 rounded-full blur-3xl" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         {/* Header */}
@@ -73,24 +73,24 @@ const Testimonials = () => {
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2, type: 'spring' }}
-            className="inline-flex items-center gap-2 bg-pink-500/10 border border-pink-500/20 rounded-full px-5 py-2 mb-6"
+            className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-5 py-2 mb-6"
           >
-            <span className="w-2 h-2 rounded-full bg-pink-400 animate-pulse" />
-            <span className="text-pink-300 text-sm font-medium tracking-wide uppercase">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="text-emerald-300 text-sm font-medium tracking-wide uppercase">
               What people say
             </span>
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <TextDecode
               text="Testimonials"
-              className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent"
+              className="bg-gradient-to-r from-teal-300 to-emerald-500 bg-clip-text text-transparent"
             />
           </h2>
           <motion.div
             initial={{ width: 0 }}
             animate={isInView ? { width: '5rem' } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"
+            className="h-1 bg-gradient-to-r from-teal-400 to-emerald-500 mx-auto rounded-full"
           />
         </motion.div>
 
@@ -123,7 +123,7 @@ const Testimonials = () => {
                   </blockquote>
                 </div>
                 <figcaption className="flex items-center gap-4 mt-6">
-                  <div className="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold">
+                  <div className="w-11 h-11 rounded-full bg-gradient-to-br from-teal-400 to-emerald-500 flex items-center justify-center text-white font-bold">
                     {current.name.charAt(0)}
                   </div>
                   <div>
@@ -147,7 +147,7 @@ const Testimonials = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               aria-label="Previous testimonial"
-              className="w-10 h-10 rounded-full bg-slate-800/60 border border-slate-700/50 flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500/40 transition-colors"
+              className="w-10 h-10 rounded-full bg-slate-800/60 border border-slate-700/50 flex items-center justify-center text-gray-400 hover:text-white hover:border-teal-500/40 transition-colors"
             >
               <FaChevronLeft className="text-sm" />
             </motion.button>
@@ -160,7 +160,7 @@ const Testimonials = () => {
                   aria-label={`Go to testimonial ${i + 1}`}
                   className={`h-2 rounded-full transition-all duration-300 ${
                     i === index
-                      ? 'w-8 bg-gradient-to-r from-blue-400 to-purple-500'
+                      ? 'w-8 bg-gradient-to-r from-teal-300 to-emerald-400'
                       : 'w-2 bg-slate-600 hover:bg-slate-500'
                   }`}
                 />
@@ -172,7 +172,7 @@ const Testimonials = () => {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               aria-label="Next testimonial"
-              className="w-10 h-10 rounded-full bg-slate-800/60 border border-slate-700/50 flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500/40 transition-colors"
+              className="w-10 h-10 rounded-full bg-slate-800/60 border border-slate-700/50 flex items-center justify-center text-gray-400 hover:text-white hover:border-teal-500/40 transition-colors"
             >
               <FaChevronRight className="text-sm" />
             </motion.button>

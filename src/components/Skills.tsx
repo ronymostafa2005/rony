@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { FaCode, FaPalette, FaCogs, FaServer } from 'react-icons/fa';
 import TextDecode from './ui/TextDecode';
 
@@ -26,8 +26,8 @@ const getMasteryTier = (level: number) => {
     return {
       label: 'Proficient',
       bg: 'bg-gradient-to-r from-blue-500/20 to-indigo-500/20',
-      text: 'text-blue-400',
-      border: 'border-blue-500/30',
+      text: 'text-teal-300',
+      border: 'border-teal-500/30',
     };
   return {
     label: 'Skilled',
@@ -38,25 +38,110 @@ const getMasteryTier = (level: number) => {
 };
 
 // ───────────────────────────────────────────────────────────
-// Counter hook — animates numbers from 0 to target
+// Language Card — CEFR-aligned proficiency (A1 → C2).
+// Recruiters and ATS systems recognize CEFR levels; raw
+// percentages are vague, so proficiency is shown on the scale.
 // ───────────────────────────────────────────────────────────
-const useCounter = (end: number, duration: number, start: boolean) => {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!start) return;
-    let t0: number | null = null;
-    let raf: number;
-    const step = (ts: number) => {
-      if (!t0) t0 = ts;
-      const p = Math.min((ts - t0) / duration, 1);
-      setCount(Math.floor(p * end));
-      if (p < 1) raf = requestAnimationFrame(step);
-    };
-    raf = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf);
-  }, [end, duration, start]);
-  return count;
-};
+const CEFR_STEPS = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'] as const;
+
+const LanguageCard = ({
+  code,
+  name,
+  nativeName,
+  cefrIndex, // number of reached CEFR steps (1–6). 6 = native
+  cefrLabel,
+  description,
+  gradient,
+  colors,
+  isVisible,
+  delay,
+}: {
+  code: string;
+  name: string;
+  nativeName: string;
+  cefrIndex: number;
+  cefrLabel: string;
+  description: string;
+  gradient: string;
+  colors: [string, string];
+  isVisible: boolean;
+  delay: number;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    animate={isVisible ? { opacity: 1, y: 0 } : {}}
+    transition={{ duration: 0.6, delay }}
+    whileHover={{ y: -5 }}
+    className="group relative bg-slate-800/40 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50 hover:border-teal-500/40 transition-colors duration-500 overflow-hidden"
+  >
+    {/* Hover glow — matches the rest of the site */}
+    <div
+      className="absolute -top-12 -right-12 w-36 h-36 rounded-full blur-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
+      style={{ background: colors[0] }}
+    />
+
+    {/* Header: language avatar + names + level badge */}
+    <div className="flex items-center gap-4 mb-5">
+      <div
+        className={`w-12 h-12 rounded-xl bg-gradient-to-br ${gradient} flex items-center justify-center text-white font-bold text-base shadow-lg shrink-0 group-hover:scale-105 transition-transform duration-500`}
+      >
+        {code}
+      </div>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-baseline gap-2">
+          <h4 className="text-lg font-bold text-white truncate">{name}</h4>
+          <span className="text-xs text-gray-500">{nativeName}</span>
+        </div>
+        <p className="text-xs text-gray-400 truncate">{description}</p>
+      </div>
+      <span
+        className="shrink-0 px-2.5 py-1 rounded-full text-[11px] font-semibold border"
+        style={{
+          color: colors[1],
+          borderColor: `${colors[1]}55`,
+          background: `${colors[0]}14`,
+        }}
+      >
+        {cefrLabel}
+      </span>
+    </div>
+
+    {/* CEFR scale — animated segments */}
+    <div className="flex gap-1.5 mb-2">
+      {CEFR_STEPS.map((step, i) => {
+        const active = i < cefrIndex;
+        return (
+          <motion.div
+            key={step}
+            initial={{ opacity: 0, scaleY: 0.4 }}
+            animate={isVisible ? { opacity: active ? 1 : 0.3, scaleY: 1 } : {}}
+            transition={{ duration: 0.4, delay: delay + 0.3 + i * 0.07 }}
+            className="flex-1 h-1.5 rounded-full"
+            style={{
+              background: active
+                ? `linear-gradient(90deg, ${colors[0]}, ${colors[1]})`
+                : 'rgba(71, 85, 105, 0.5)',
+              boxShadow: active ? `0 0 10px ${colors[0]}45` : 'none',
+            }}
+          />
+        );
+      })}
+    </div>
+
+    {/* Step labels — reached steps are highlighted */}
+    <div className="flex justify-between text-[10px] font-mono">
+      {CEFR_STEPS.map((step, i) => (
+        <span
+          key={step}
+          className={i < cefrIndex ? 'font-semibold' : 'text-gray-600'}
+          style={i < cefrIndex ? { color: colors[1] } : undefined}
+        >
+          {step}
+        </span>
+      ))}
+    </div>
+  </motion.div>
+);
 
 // ───────────────────────────────────────────────────────────
 // Mastery Cubes — 5 glowing gem-like blocks replacing rings
@@ -105,65 +190,6 @@ const MasteryCubes = ({
 };
 
 // ───────────────────────────────────────────────────────────
-// Language Gauge (Semi-circular) — matches reference design
-// ───────────────────────────────────────────────────────────
-const LanguageGauge = ({
-  level,
-  label,
-  proficiency,
-  gradientId,
-  colors,
-  isVisible,
-}: {
-  level: number;
-  label: string;
-  proficiency: string;
-  gradientId: string;
-  colors: [string, string];
-  isVisible: boolean;
-}) => {
-  const radius = 60;
-  const circumference = Math.PI * radius;
-  const offset = circumference - (level / 100) * circumference;
-  const count = useCounter(level, 1800, isVisible);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6 }}
-      whileHover={{ scale: 1.04, y: -5 }}
-      className="bg-slate-800/40 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50 hover:border-indigo-500/40 transition-all duration-500 flex flex-col items-center"
-    >
-      <div className="relative w-36 h-20 mb-3">
-        <svg viewBox="0 0 140 80" className="w-full h-full">
-          <defs>
-            <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor={colors[0]} />
-              <stop offset="100%" stopColor={colors[1]} />
-            </linearGradient>
-          </defs>
-          <path d="M 10 70 A 60 60 0 0 1 130 70" className="gauge-track" />
-          <path
-            d="M 10 70 A 60 60 0 0 1 130 70"
-            className="gauge-fill"
-            stroke={`url(#${gradientId})`}
-            strokeDasharray={circumference}
-            strokeDashoffset={isVisible ? offset : circumference}
-            style={{ filter: `drop-shadow(0 0 8px ${colors[0]}50)` }}
-          />
-        </svg>
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 text-center">
-          <span className="text-2xl font-bold text-white">{count}%</span>
-        </div>
-      </div>
-      <h4 className="text-lg font-bold text-white mt-1">{label}</h4>
-      <p className="text-sm text-gray-400">{proficiency}</p>
-    </motion.div>
-  );
-};
-
-// ───────────────────────────────────────────────────────────
 // Orbital Ring — technologies orbiting a center icon
 // ───────────────────────────────────────────────────────────
 interface OrbitSkill {
@@ -198,7 +224,7 @@ const OrbitalView = ({
             style={{
               width: `${ring * 22 + 20}%`,
               height: `${ring * 22 + 20}%`,
-              borderColor: `rgba(99, 102, 241, ${0.12 - ring * 0.02})`,
+              borderColor: `rgba(20, 184, 166, ${0.12 - ring * 0.02})`,
             }}
             animate={{
               scale: [1, 1.02, 1],
@@ -225,7 +251,7 @@ const OrbitalView = ({
         <div
           className="w-3/4 h-3/4 rounded-full"
           style={{
-            background: 'conic-gradient(from 0deg, transparent 0%, rgba(99, 102, 241, 0.08) 25%, transparent 50%, rgba(168, 85, 247, 0.08) 75%, transparent 100%)',
+            background: 'conic-gradient(from 0deg, transparent 0%, rgba(20, 184, 166, 0.08) 25%, transparent 50%, rgba(45, 212, 191, 0.08) 75%, transparent 100%)',
             filter: 'blur(30px)',
           }}
         />
@@ -236,9 +262,9 @@ const OrbitalView = ({
         <motion.div
           animate={{
             boxShadow: [
-              '0 0 30px rgba(99, 102, 241, 0.2)',
-              '0 0 60px rgba(99, 102, 241, 0.4)',
-              '0 0 30px rgba(99, 102, 241, 0.2)',
+              '0 0 30px rgba(20, 184, 166, 0.2)',
+              '0 0 60px rgba(20, 184, 166, 0.4)',
+              '0 0 30px rgba(20, 184, 166, 0.2)',
             ],
           }}
           transition={{ duration: 3, repeat: Infinity }}
@@ -289,7 +315,7 @@ const OrbitalView = ({
               }}
               className="flex flex-col items-center"
             >
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-slate-800/70 backdrop-blur-md border border-slate-700/50 flex items-center justify-center hover:border-indigo-500/40 hover:scale-110 transition-all duration-300 group">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-slate-800/70 backdrop-blur-md border border-slate-700/50 flex items-center justify-center hover:border-teal-500/40 hover:scale-110 transition-all duration-300 group">
                 <img
                   src={skill.iconUrl}
                   alt={skill.name}
@@ -318,7 +344,7 @@ const OrbitalView = ({
               y1="50"
               x2={x}
               y2={y}
-              stroke="rgba(99, 102, 241, 0.1)"
+              stroke="rgba(20, 184, 166, 0.1)"
               strokeWidth="0.3"
               strokeDasharray="2 2"
               initial={{ pathLength: 0 }}
@@ -346,7 +372,7 @@ const Skills = () => {
       title: 'Frontend',
       icon: FaCode,
       gradient: 'from-blue-500 to-cyan-400',
-      bgGlow: 'rgba(59, 130, 246, 0.15)',
+      bgGlow: 'rgba(34, 211, 238, 0.15)',
       skills: [
         {
           name: 'React.js',
@@ -439,8 +465,8 @@ const Skills = () => {
     {
       title: 'Tools',
       icon: FaCogs,
-      gradient: 'from-purple-500 to-pink-500',
-      bgGlow: 'rgba(168, 85, 247, 0.15)',
+      gradient: 'from-emerald-500 to-cyan-500',
+      bgGlow: 'rgba(45, 212, 191, 0.15)',
       skills: [
         {
           name: 'Redux',
@@ -512,13 +538,13 @@ const Skills = () => {
   ];
 
   const softSkills = [
-    { name: 'Teamwork & Collaboration', emoji: '🤝', gradient: 'from-blue-500 to-indigo-600' },
-    { name: 'Excellent Communication', emoji: '💬', gradient: 'from-purple-500 to-pink-500' },
+    { name: 'Teamwork & Collaboration', emoji: '🤝', gradient: 'from-teal-500 to-emerald-600' },
+    { name: 'Excellent Communication', emoji: '💬', gradient: 'from-emerald-500 to-cyan-500' },
     { name: 'Problem Solving', emoji: '🧩', gradient: 'from-amber-500 to-orange-500' },
     { name: 'Web Design', emoji: '🎨', gradient: 'from-cyan-500 to-blue-500' },
     { name: 'Calm Under Pressure', emoji: '🧘', gradient: 'from-emerald-500 to-teal-500' },
-    { name: 'Technology Integration', emoji: '⚡', gradient: 'from-violet-500 to-purple-500' },
-    { name: 'Adaptability', emoji: '🔄', gradient: 'from-rose-500 to-red-500' },
+    { name: 'Technology Integration', emoji: '⚡', gradient: 'from-teal-500 to-cyan-500' },
+    { name: 'Adaptability', emoji: '🔄', gradient: 'from-emerald-400 to-teal-500' },
     { name: 'Time Management', emoji: '⏱️', gradient: 'from-teal-500 to-cyan-500' },
   ];
 
@@ -530,9 +556,9 @@ const Skills = () => {
     <section id="skills" className="py-24 relative overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0 skills-bg-pattern opacity-50" />
-      <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/[0.03] rounded-full blur-3xl" />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-teal-500/[0.03] rounded-full blur-3xl" />
 
       {/* Aurora wave effect at top */}
       <div className="absolute top-0 left-0 w-full h-64 overflow-hidden pointer-events-none">
@@ -544,7 +570,7 @@ const Skills = () => {
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute -top-32 left-1/4 w-[600px] h-[300px] opacity-30"
           style={{
-            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.08))',
+            background: 'linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(52, 211, 153, 0.1), rgba(103, 232, 249, 0.08))',
             borderRadius: '50%',
             filter: 'blur(60px)',
           }}
@@ -557,7 +583,7 @@ const Skills = () => {
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute -top-20 right-1/4 w-[500px] h-[250px] opacity-20"
           style={{
-            background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(59, 130, 246, 0.1))',
+            background: 'linear-gradient(135deg, rgba(45, 212, 191, 0.15), rgba(34, 211, 238, 0.1))',
             borderRadius: '50%',
             filter: 'blur(50px)',
           }}
@@ -576,10 +602,10 @@ const Skills = () => {
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2, type: 'spring' }}
-            className="inline-flex items-center gap-2 bg-indigo-500/10 border border-indigo-500/20 rounded-full px-5 py-2 mb-6"
+            className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 rounded-full px-5 py-2 mb-6"
           >
-            <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
-            <span className="text-indigo-300 text-sm font-medium tracking-wide uppercase">
+            <span className="w-2 h-2 rounded-full bg-teal-300 animate-pulse" />
+            <span className="text-teal-300 text-sm font-medium tracking-wide uppercase">
               Technologies I work with
             </span>
           </motion.div>
@@ -588,14 +614,14 @@ const Skills = () => {
             <span className="text-white">Skills &amp; </span>
             <TextDecode
               text="Expertise"
-              className="bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent"
+              className="bg-gradient-to-r from-teal-300 via-cyan-400 to-emerald-500 bg-clip-text text-transparent"
             />
           </h2>
           <motion.div
             initial={{ width: 0 }}
             animate={isInView ? { width: '5rem' } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 mx-auto rounded-full mt-4"
+            className="h-1 bg-gradient-to-r from-teal-400 via-cyan-500 to-emerald-600 mx-auto rounded-full mt-4"
           />
         </motion.div>
 
@@ -805,7 +831,7 @@ const Skills = () => {
           className="mb-20"
         >
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-emerald-500 flex items-center justify-center">
               <span className="text-lg">✨</span>
             </div>
             <h3 className="text-2xl font-bold bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
@@ -850,45 +876,62 @@ const Skills = () => {
           </div>
         </motion.div>
 
-        {/* ────── Languages (Semi-circular Gauge) ────── */}
+        {/* ────── Languages — CEFR proficiency cards ────── */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.9 }}
         >
           <div className="flex items-center gap-3 mb-8">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-blue-500 flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center">
               <span className="text-lg">🌍</span>
             </div>
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">
-              Languages
-            </h3>
+            <div>
+              <h3 className="text-2xl font-bold bg-gradient-to-r from-emerald-300 to-cyan-300 bg-clip-text text-transparent">
+                Languages
+              </h3>
+              <p className="text-xs text-gray-500 mt-0.5">
+                Levels follow the CEFR scale (Common European Framework of Reference)
+              </p>
+            </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            <LanguageGauge
-              level={100}
-              label="Arabic"
-              proficiency="Native Speaker"
-              gradientId="gauge-arabic"
+            <LanguageCard
+              code="ع"
+              name="Arabic"
+              nativeName="العربية"
+              cefrIndex={6}
+              cefrLabel="Native"
+              description="Mother tongue — full fluency in every context"
+              gradient="from-emerald-500 to-cyan-500"
               colors={['#10b981', '#06b6d4']}
               isVisible={isInView as boolean}
+              delay={0}
             />
-            <LanguageGauge
-              level={85}
-              label="English"
-              proficiency="Upper Intermediate"
-              gradientId="gauge-english"
-              colors={['#6366f1', '#a855f7']}
+            <LanguageCard
+              code="EN"
+              name="English"
+              nativeName="English"
+              cefrIndex={5}
+              cefrLabel="C1"
+              description="Professional working proficiency"
+              gradient="from-cyan-500 to-teal-500"
+              colors={['#14b8a6', '#10b981']}
               isVisible={isInView as boolean}
+              delay={0.1}
             />
-            <LanguageGauge
-              level={60}
-              label="German"
-              proficiency="Intermediate"
-              gradientId="gauge-german"
-              colors={['#f59e0b', '#ef4444']}
+            <LanguageCard
+              code="DE"
+              name="German"
+              nativeName="Deutsch"
+              cefrIndex={3}
+              cefrLabel="B1"
+              description="Conversational — actively improving"
+              gradient="from-amber-500 to-rose-500"
+              colors={['#34d399', '#ef4444']}
               isVisible={isInView as boolean}
+              delay={0.2}
             />
           </div>
         </motion.div>
@@ -915,7 +958,7 @@ const Skills = () => {
                 className="group"
               >
                 <div className="text-2xl mb-2">{stat.icon}</div>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-1 group-hover:text-indigo-400 transition-colors duration-300">
+                <div className="text-3xl md:text-4xl font-bold text-white mb-1 group-hover:text-teal-300 transition-colors duration-300">
                   {stat.value}
                 </div>
                 <div className="text-gray-400 text-sm">{stat.label}</div>

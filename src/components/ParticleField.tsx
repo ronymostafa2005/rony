@@ -89,7 +89,7 @@ const ParticleField = () => {
         // Draw particle
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(139, 92, 246, ${p.opacity})`;
+        ctx.fillStyle = `rgba(52, 211, 153, ${p.opacity})`;
         ctx.fill();
 
         // Draw connections
@@ -104,7 +104,7 @@ const ParticleField = () => {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(99, 102, 241, ${opacity})`;
+            ctx.strokeStyle = `rgba(20, 184, 166, ${opacity})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -116,7 +116,7 @@ const ParticleField = () => {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(168, 85, 247, ${opacity})`;
+          ctx.strokeStyle = `rgba(45, 212, 191, ${opacity})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }

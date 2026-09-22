@@ -97,9 +97,9 @@ const CustomCursor = () => {
           className="w-full h-full rounded-full"
           style={{
             background: isHovering
-              ? 'radial-gradient(circle, rgba(139, 92, 246, 0.3) 0%, rgba(99, 102, 241, 0.15) 100%)'
+              ? 'radial-gradient(circle, rgba(52, 211, 153, 0.3) 0%, rgba(20, 184, 166, 0.15) 100%)'
               : 'white',
-            border: isHovering ? '2px solid rgba(139, 92, 246, 0.6)' : 'none',
+            border: isHovering ? '2px solid rgba(52, 211, 153, 0.6)' : 'none',
             backdropFilter: isHovering ? 'blur(4px)' : 'none',
           }}
         />
@@ -118,7 +118,7 @@ const CustomCursor = () => {
           width: isHovering ? 64 : 36,
           height: isHovering ? 64 : 36,
           opacity: isVisible ? 0.5 : 0,
-          borderColor: isHovering ? 'rgba(139, 92, 246, 0.4)' : 'rgba(255, 255, 255, 0.2)',
+          borderColor: isHovering ? 'rgba(52, 211, 153, 0.4)' : 'rgba(255, 255, 255, 0.2)',
         }}
         transition={{ duration: 0.3, ease: 'easeOut' }}
       >

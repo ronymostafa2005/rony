@@ -121,14 +121,14 @@ const Contact = () => {
   };
 
   const inputClass =
-    'w-full px-4 py-3 bg-slate-900/50 border border-slate-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 text-sm';
+    'w-full px-4 py-3 bg-slate-900/50 border border-slate-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-teal-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all duration-300 text-sm';
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       {/* Background */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-      <div className="absolute top-20 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-500/20 to-transparent" />
+      <div className="absolute top-20 right-0 w-80 h-80 bg-teal-500/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         {/* Header */}
@@ -152,14 +152,14 @@ const Contact = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <TextDecode
               text="Let's Work Together"
-              className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent"
+              className="bg-gradient-to-r from-teal-300 to-emerald-500 bg-clip-text text-transparent"
             />
           </h2>
           <motion.div
             initial={{ width: 0 }}
             animate={isInView ? { width: '5rem' } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"
+            className="h-1 bg-gradient-to-r from-teal-400 to-emerald-500 mx-auto rounded-full"
           />
         </motion.div>
 
@@ -202,7 +202,7 @@ const Contact = () => {
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                   whileHover={{ x: 5, scale: 1.02 }}
-                  className="flex items-center p-4 bg-slate-800/40 backdrop-blur-xl rounded-xl border border-slate-700/40 hover:border-blue-500/30 transition-all duration-300 group"
+                  className="flex items-center p-4 bg-slate-800/40 backdrop-blur-xl rounded-xl border border-slate-700/40 hover:border-teal-500/30 transition-all duration-300 group"
                 >
                   <div
                     className={`p-3 rounded-xl bg-gradient-to-r ${info.gradient} mr-4 group-hover:scale-110 transition-transform duration-300`}
@@ -226,7 +226,7 @@ const Contact = () => {
                 transition={{ delay: 0.6 + index * 0.1 }}
                 className="flex items-center gap-3 p-4 bg-slate-800/40 backdrop-blur-xl rounded-xl border border-slate-700/40"
               >
-                <div className="p-2 rounded-lg bg-amber-500/10">
+                <div className="p-2 rounded-lg bg-teal-500/10">
                   <info.icon className="text-amber-400" />
                 </div>
                 <div>
@@ -258,7 +258,7 @@ const Contact = () => {
                     initial={{ opacity: 0, scale: 0 }}
                     animate={isInView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.4, delay: 0.9 + index * 0.1 }}
-                    className="w-11 h-11 rounded-xl bg-slate-800/60 border border-slate-700/50 flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500/40 hover:bg-blue-500/10 transition-all duration-300"
+                    className="w-11 h-11 rounded-xl bg-slate-800/60 border border-slate-700/50 flex items-center justify-center text-gray-400 hover:text-white hover:border-teal-500/40 hover:bg-teal-500/10 transition-all duration-300"
                   >
                     <social.icon size={18} />
                   </motion.a>
@@ -398,7 +398,7 @@ const Contact = () => {
 
                   {!FORMSPREE_ENDPOINT && (
                     <p className="text-xs text-gray-500 flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500/60" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-teal-500/60" />
                       Demo mode: submitting opens your email client. (Set{' '}
                       <code className="text-gray-400 font-mono">VITE_FORMSPREE_ID</code> to send
                       directly.)
@@ -410,8 +410,8 @@ const Contact = () => {
                     disabled={status === 'sending'}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl text-white font-semibold shadow-lg relative overflow-hidden flex items-center justify-center gap-2 disabled:opacity-70"
-                    style={{ boxShadow: '0 4px 25px rgba(99, 102, 241, 0.3)' }}
+                    className="w-full px-8 py-4 bg-gradient-to-r from-teal-400 to-emerald-500 rounded-xl text-white font-semibold shadow-lg relative overflow-hidden flex items-center justify-center gap-2 disabled:opacity-70"
+                    style={{ boxShadow: '0 4px 25px rgba(20, 184, 166, 0.3)' }}
                   >
                     {status === 'sending' ? (
                       <>

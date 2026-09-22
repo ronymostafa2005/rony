@@ -39,8 +39,8 @@ const ResumePage = () => {
               onClick={handlePrint}
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-semibold shadow-lg"
-              style={{ boxShadow: '0 2px 15px rgba(99, 102, 241, 0.35)' }}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-teal-400 to-emerald-500 text-white text-sm font-semibold shadow-lg"
+              style={{ boxShadow: '0 2px 15px rgba(20, 184, 166, 0.35)' }}
             >
               <FaDownload className="text-xs" />
               Save as PDF
@@ -58,49 +58,49 @@ const ResumePage = () => {
           className="resume-sheet max-w-4xl mx-auto bg-white text-slate-800 rounded-xl shadow-2xl print:shadow-none print:rounded-none"
         >
           {/* Header */}
-          <header className="resume-header px-10 pt-10 pb-6 print:px-8 print:pt-8 border-b-2 border-blue-600/80">
+          <header className="resume-header px-10 pt-10 pb-6 print:px-8 print:pt-8 border-b-2 border-teal-600/80">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <h1 className="text-3xl font-black text-slate-900 tracking-tight print:text-2xl">
                   {profile.name}
                 </h1>
-                <p className="mt-1 text-lg font-semibold text-blue-700 print:text-base">
+                <p className="mt-1 text-lg font-semibold text-teal-700 print:text-base">
                   {profile.title}
                 </p>
               </div>
               <ul className="text-sm text-slate-600 space-y-1.5 print:text-xs">
                 <li className="flex items-center gap-2">
-                  <FaEnvelope className="text-blue-600 shrink-0" />
-                  <a href={`mailto:${profile.email}`} className="hover:text-blue-700 print:no-underline">
+                  <FaEnvelope className="text-teal-600 shrink-0" />
+                  <a href={`mailto:${profile.email}`} className="hover:text-teal-700 print:no-underline">
                     {profile.email}
                   </a>
                 </li>
                 <li className="flex items-center gap-2">
-                  <FaGithub className="text-blue-600 shrink-0" />
+                  <FaGithub className="text-teal-600 shrink-0" />
                   <a
                     href={profile.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="hover:text-blue-700"
+                    className="hover:text-teal-700"
                   >
                     github.com/ronymostafa2005
                   </a>
                 </li>
                 {profile.linkedin && (
                   <li className="flex items-center gap-2">
-                    <FaLinkedin className="text-blue-600 shrink-0" />
+                    <FaLinkedin className="text-teal-600 shrink-0" />
                     <a
                       href={profile.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:text-blue-700"
+                      className="hover:text-teal-700"
                     >
                       LinkedIn Profile
                     </a>
                   </li>
                 )}
                 <li className="flex items-center gap-2">
-                  <FaMapMarkerAlt className="text-blue-600 shrink-0" />
+                  <FaMapMarkerAlt className="text-teal-600 shrink-0" />
                   {profile.location}
                 </li>
               </ul>
@@ -138,7 +138,7 @@ const ResumePage = () => {
                     <div className="flex flex-wrap items-baseline justify-between gap-x-4">
                       <h3 className="text-base font-bold text-slate-900 print:text-sm">
                         {job.position}{' '}
-                        <span className="font-semibold text-blue-700">· {job.company}</span>
+                        <span className="font-semibold text-teal-700">· {job.company}</span>
                       </h3>
                       <span className="text-xs font-medium text-slate-500 whitespace-nowrap">
                         {job.period} | {job.location}
@@ -150,7 +150,7 @@ const ResumePage = () => {
                           key={i}
                           className="text-sm text-slate-700 leading-relaxed flex gap-2 print:text-xs"
                         >
-                          <span className="text-blue-600 mt-0.5 shrink-0">▸</span>
+                          <span className="text-teal-600 mt-0.5 shrink-0">▸</span>
                           {bullet}
                         </li>
                       ))}
@@ -174,7 +174,7 @@ const ResumePage = () => {
                             href={project.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="ml-2 text-xs font-medium text-blue-700 hover:underline print:no-underline"
+                            className="ml-2 text-xs font-medium text-teal-700 hover:underline print:no-underline"
                           >
                             ({project.link.replace(/^https?:\/\/(www\.)?/, '')})
                           </a>
@@ -198,7 +198,7 @@ const ResumePage = () => {
                   {education.map((edu) => (
                     <div key={edu.institution} className="text-sm print:text-xs">
                       <p className="font-bold text-slate-900">{edu.institution}</p>
-                      <p className={edu.highlight ? 'text-blue-700 font-semibold' : 'text-slate-600'}>
+                      <p className={edu.highlight ? 'text-teal-700 font-semibold' : 'text-slate-600'}>
                         {edu.credential}
                       </p>
                       <p className="text-xs text-slate-500">{edu.period}</p>

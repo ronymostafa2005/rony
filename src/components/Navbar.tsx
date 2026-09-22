@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useCallback } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import Icon3D from './ui/Icon3D';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,9 +65,12 @@ const Navbar = () => {
             href="#home"
             onClick={(e) => { e.preventDefault(); handleNavClick('#home'); }}
             whileHover={{ scale: 1.05 }}
-            className="text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+            className="flex items-center gap-2.5"
           >
-            RAWAN MOSTAFA
+            <Icon3D name="Rocket" size={26} float />
+            <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-teal-300 via-emerald-400 to-cyan-400 bg-clip-text text-transparent">
+              RAWAN MOSTAFA
+            </span>
           </motion.a>
 
           {/* Desktop Menu */}
@@ -107,8 +111,8 @@ const Navbar = () => {
               onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="ml-4 px-5 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white text-sm font-semibold shadow-lg relative overflow-hidden"
-              style={{ boxShadow: '0 2px 15px rgba(99, 102, 241, 0.3)' }}
+              className="ml-4 px-5 py-2 bg-gradient-to-r from-teal-400 to-emerald-500 rounded-full text-white text-sm font-semibold shadow-lg relative overflow-hidden"
+              style={{ boxShadow: '0 2px 15px rgba(20, 184, 166, 0.3)' }}
             >
               <span className="relative z-10">Let's Talk</span>
               <motion.div
@@ -173,7 +177,7 @@ const Navbar = () => {
             initial={{ opacity: 0, x: -20 }}
             animate={isOpen ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{ delay: navItems.length * 0.05 }}
-            className="block mt-2 px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg text-white text-center font-semibold"
+            className="block mt-2 px-4 py-3 bg-gradient-to-r from-teal-400 to-emerald-500 rounded-lg text-white text-center font-semibold"
           >
             Let's Talk
           </motion.a>

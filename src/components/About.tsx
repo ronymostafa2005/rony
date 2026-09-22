@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
-import { FaCode, FaRocket, FaPalette, FaLightbulb } from 'react-icons/fa';
+import Icon3D from './ui/Icon3D';
 import TextDecode from './ui/TextDecode';
 
 // Animated counter
@@ -44,9 +44,9 @@ const StatCard = ({
       animate={isInView ? { opacity: 1, scale: 1 } : {}}
       transition={{ duration: 0.5, delay: 1 + index * 0.1 }}
       whileHover={{ scale: 1.05, y: -3 }}
-      className="bg-slate-800/40 backdrop-blur-sm rounded-xl p-4 border border-slate-700/40 hover:border-blue-500/30 transition-all duration-300 text-center"
+      className="bg-slate-800/40 backdrop-blur-sm rounded-xl p-4 border border-slate-700/40 hover:border-teal-500/30 transition-all duration-300 text-center"
     >
-      <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+      <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-teal-300 to-emerald-400 bg-clip-text text-transparent">
         {count}
         {suffix}
       </span>
@@ -61,28 +61,28 @@ const About = () => {
 
   const features = [
     {
-      icon: FaCode,
+      icon: 'Keyboard',
       title: 'Clean Code',
       description: 'Writing maintainable and scalable code following best practices',
-      gradient: 'from-blue-500 to-cyan-500',
+      gradient: 'from-teal-500 to-cyan-500',
     },
     {
-      icon: FaRocket,
+      icon: 'Rocket',
       title: 'Performance',
       description: 'Optimizing for speed and efficiency',
-      gradient: 'from-purple-500 to-pink-500',
+      gradient: 'from-emerald-500 to-teal-500',
     },
     {
-      icon: FaPalette,
+      icon: 'Artist palette',
       title: 'Design Focused',
       description: 'Creating beautiful UI/UX experiences',
-      gradient: 'from-orange-500 to-red-500',
+      gradient: 'from-cyan-400 to-teal-500',
     },
     {
-      icon: FaLightbulb,
+      icon: 'Light bulb',
       title: 'Problem Solver',
       description: 'Turning challenges into opportunities',
-      gradient: 'from-green-500 to-teal-500',
+      gradient: 'from-lime-500 to-emerald-500',
     },
   ];
 
@@ -112,7 +112,7 @@ const About = () => {
   return (
     <section id="about" className="py-24 relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-500/20 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
@@ -125,24 +125,24 @@ const About = () => {
             initial={{ scale: 0 }}
             animate={isInView ? { scale: 1 } : {}}
             transition={{ duration: 0.5, delay: 0.2, type: 'spring' }}
-            className="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-5 py-2 mb-6"
+            className="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 rounded-full px-5 py-2 mb-6"
           >
-            <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-            <span className="text-blue-300 text-sm font-medium tracking-wide uppercase">
+            <span className="w-2 h-2 rounded-full bg-teal-300 animate-pulse" />
+            <span className="text-teal-300 text-sm font-medium tracking-wide uppercase">
               Get to know me
             </span>
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
             <TextDecode
               text="About Me"
-              className="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent"
+              className="bg-gradient-to-r from-teal-300 to-emerald-500 bg-clip-text text-transparent"
             />
           </h2>
           <motion.div
             initial={{ width: 0 }}
             animate={isInView ? { width: '5rem' } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"
+            className="h-1 bg-gradient-to-r from-teal-400 to-emerald-500 mx-auto rounded-full"
           />
         </motion.div>
 
@@ -156,7 +156,7 @@ const About = () => {
               className="relative"
             >
               {/* Glow background */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-500/5 to-purple-600/5 rounded-2xl blur-xl" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-teal-500/5 to-emerald-600/5 rounded-2xl blur-xl" />
 
               {/* Code Editor */}
               <div className="relative bg-slate-800/60 backdrop-blur-xl rounded-2xl border border-slate-700/50 overflow-hidden">
@@ -180,8 +180,8 @@ const About = () => {
                       animate={isInView ? { opacity: 1, x: 0 } : {}}
                       transition={{ duration: 0.4, delay: 0.5 + index * 0.15 }}
                     >
-                      <span className="text-purple-400">{line.prefix}</span>
-                      <span className="text-blue-300">{line.keyword || ''}</span>
+                      <span className="text-emerald-300">{line.prefix}</span>
+                      <span className="text-teal-300">{line.keyword || ''}</span>
                       <span className="text-white">{line.op || ''}</span>
                       <span className="text-amber-300">{line.value}</span>
                       <span className="text-gray-500">{line.comma}</span>
@@ -191,7 +191,7 @@ const About = () => {
                   <motion.span
                     animate={{ opacity: [1, 0, 1] }}
                     transition={{ duration: 1, repeat: Infinity }}
-                    className="inline-block w-2 h-5 bg-blue-400 ml-1"
+                    className="inline-block w-2 h-5 bg-teal-300 ml-1"
                   />
                 </div>
               </div>
@@ -226,18 +226,18 @@ const About = () => {
           >
             <div className="space-y-5">
               <p className="text-gray-300 text-lg leading-relaxed">
-                I'm a passionate <span className="text-blue-400 font-semibold">Front-End Developer</span>{' '}
+                I'm a passionate <span className="text-teal-300 font-semibold">Front-End Developer</span>{' '}
                 with over 3 years of experience building modern web applications. I love turning
                 ideas into elegant and performant digital solutions.
               </p>
               <p className="text-gray-300 text-lg leading-relaxed">
                 My journey started at{' '}
-                <span className="text-purple-400 font-semibold">Black Hours Academy</span>, and since
+                <span className="text-emerald-300 font-semibold">Black Hours Academy</span>, and since
                 then I've worked with various companies delivering solutions that exceed
                 expectations. I specialize in{' '}
-                <span className="text-blue-400 font-semibold">React.js</span>,{' '}
-                <span className="text-blue-400 font-semibold">Next.js</span>, and{' '}
-                <span className="text-blue-400 font-semibold">TypeScript</span>.
+                <span className="text-teal-300 font-semibold">React.js</span>,{' '}
+                <span className="text-teal-300 font-semibold">Next.js</span>, and{' '}
+                <span className="text-teal-300 font-semibold">TypeScript</span>.
               </p>
               <p className="text-gray-300 text-lg leading-relaxed">
                 I believe in writing clean, maintainable code and creating seamless user
@@ -254,12 +254,10 @@ const About = () => {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="bg-slate-800/40 backdrop-blur-sm rounded-xl p-5 border border-slate-700/40 hover:border-blue-500/30 transition-all duration-300 group"
+                  className="bg-slate-800/40 backdrop-blur-sm rounded-xl p-5 border border-slate-700/40 hover:border-teal-500/30 transition-all duration-300 group"
                 >
-                  <div
-                    className={`w-10 h-10 rounded-lg bg-gradient-to-r ${feature.gradient} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <feature.icon className="text-white text-lg" />
+                  <div className="flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                    <Icon3D name={feature.icon} size={30} float />
                   </div>
                   <h3 className="text-white font-semibold mb-1">{feature.title}</h3>
                   <p className="text-gray-400 text-sm">{feature.description}</p>

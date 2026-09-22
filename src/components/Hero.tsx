@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { FaGithub, FaLinkedin, FaEnvelope, FaDownload, FaChevronDown } from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
+import Icon3D from './ui/Icon3D';
 import { useRef, useState, useEffect } from 'react';
 import { useInView, useReducedMotion } from 'framer-motion';
 import useMagnetic from '../hooks/useMagnetic';
@@ -46,7 +47,7 @@ const StatItem = ({
       className="text-center group"
     >
       <div className="relative">
-        <motion.span className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+        <motion.span className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-300 to-emerald-400 bg-clip-text text-transparent">
           {count}
           {suffix}
         </motion.span>
@@ -178,9 +179,21 @@ const Hero = () => {
   };
 
   const socialLinks = [
-    { icon: FaGithub, href: 'https://github.com/ronymostafa2005', label: 'GitHub' },
-    { icon: FaLinkedin, href: '#', label: 'LinkedIn' }, // TODO: real LinkedIn URL
-    { icon: FaEnvelope, href: 'mailto:rowan.mostafa2005@gmail.com', label: 'Email' },
+    {
+      icon: <Icon3D devicon="github/github-original" size={16} invert />,
+      href: 'https://github.com/ronymostafa2005',
+      label: 'GitHub',
+    },
+    {
+      icon: <Icon3D devicon="linkedin/linkedin-original" size={16} />,
+      href: '#',
+      label: 'LinkedIn',
+    }, // TODO: real LinkedIn URL
+    {
+      icon: <Icon3D name="Envelope" size={16} />,
+      href: 'mailto:rowan.mostafa2005@gmail.com',
+      label: 'Email',
+    },
   ];
 
   const stats = [
@@ -204,7 +217,7 @@ const Hero = () => {
         <motion.div
           className="absolute top-1/4 -left-20 w-96 h-96 rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(34, 211, 238, 0.08) 0%, transparent 70%)',
           }}
           animate={{ x: [0, 50, 0], y: [0, -30, 0], scale: [1, 1.2, 1] }}
           transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
@@ -212,7 +225,7 @@ const Hero = () => {
         <motion.div
           className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(52, 211, 153, 0.08) 0%, transparent 70%)',
           }}
           animate={{ x: [0, -40, 0], y: [0, 40, 0], scale: [1, 1.3, 1] }}
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
@@ -220,7 +233,7 @@ const Hero = () => {
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(236, 72, 153, 0.05) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(103, 232, 249, 0.05) 0%, transparent 70%)',
           }}
           animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
           transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
@@ -254,7 +267,7 @@ const Hero = () => {
                       delay: 0.3 + i * 0.04,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="inline-block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+                    className="inline-block bg-gradient-to-r from-teal-300 via-emerald-400 to-cyan-400 bg-clip-text text-transparent"
                     style={{ minWidth: letter === ' ' ? '0.3em' : 'auto' }}
                   >
                     {letter === ' ' ? '\u00A0' : letter}
@@ -270,7 +283,7 @@ const Hero = () => {
               transition={{ delay: 0.8, duration: 0.5 }}
               className="mb-2"
             >
-              <span className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 text-blue-400 text-sm font-medium">
+              <span className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-teal-500/20 rounded-full px-4 py-1.5 text-teal-300 text-sm font-medium">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                 Available for opportunities
               </span>
@@ -321,7 +334,7 @@ const Hero = () => {
             >
               <MagneticButton
                 href="#projects"
-                className="group relative px-8 py-3.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white font-semibold shadow-lg overflow-hidden"
+                className="group relative px-8 py-3.5 bg-gradient-to-r from-teal-400 to-emerald-500 rounded-full text-white font-semibold shadow-lg overflow-hidden"
               >
                 <span className="relative z-10 inline-block py-1">View My Work</span>
                 {/* Shimmer effect */}
@@ -334,9 +347,11 @@ const Hero = () => {
               </MagneticButton>
               <MagneticButton
                 href="/resume"
-                className="group px-8 py-3.5 border-2 border-slate-600 rounded-full text-gray-300 font-semibold hover:border-blue-500/50 hover:text-white transition-colors duration-300 flex items-center justify-center gap-2"
+                className="group px-8 py-3.5 border-2 border-slate-600 rounded-full text-gray-300 font-semibold hover:border-teal-500/50 hover:text-white transition-colors duration-300 flex items-center justify-center gap-2"
               >
-                <FaDownload className="text-sm group-hover:animate-bounce" />
+                <span className="inline-block group-hover:animate-bounce">
+                  <Icon3D name="Page facing up" size={18} />
+                </span>
                 Download CV
               </MagneticButton>
             </motion.div>
@@ -360,9 +375,9 @@ const Hero = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 1.6 + index * 0.1 }}
-                  className="w-11 h-11 rounded-full bg-slate-800/60 border border-slate-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300"
+                  className="w-11 h-11 rounded-full bg-slate-800/60 border border-slate-700 flex items-center justify-center text-gray-400 hover:text-white hover:border-teal-500/50 hover:bg-teal-500/10 transition-all duration-300"
                 >
-                  <social.icon size={18} />
+                  <social.icon />
                 </motion.a>
               ))}
             </motion.div>
@@ -380,9 +395,9 @@ const Hero = () => {
               <motion.div
                 animate={{
                   boxShadow: [
-                    '0 0 30px rgba(59, 130, 246, 0.3)',
-                    '0 0 60px rgba(139, 92, 246, 0.4)',
-                    '0 0 30px rgba(59, 130, 246, 0.3)',
+                    '0 0 30px rgba(34, 211, 238, 0.3)',
+                    '0 0 60px rgba(52, 211, 153, 0.4)',
+                    '0 0 30px rgba(34, 211, 238, 0.3)',
                   ],
                 }}
                 transition={{ duration: 4, repeat: Infinity }}
@@ -395,7 +410,7 @@ const Hero = () => {
                   transformStyle: 'preserve-3d',
                   transformPerspective: 600,
                 }}
-                className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 p-1 relative z-10"
+                className="w-48 h-48 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-teal-500 via-emerald-500 to-cyan-400 p-1 relative z-10"
               >
                 <img
                   src="/WhatsApp Image 2026-02-03 at 2.09.58 AM.jpeg"
@@ -408,7 +423,7 @@ const Hero = () => {
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="absolute inset-0 rounded-full border-2 border-dashed border-blue-500/20 scale-[1.15]"
+                className="absolute inset-0 rounded-full border-2 border-dashed border-teal-500/20 scale-[1.15]"
               />
 
               {/* Deploy Terminal Card */}
@@ -431,9 +446,9 @@ const Hero = () => {
                 <motion.div
                   animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
-                  className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 backdrop-blur-xl rounded-xl p-3 border border-blue-500/30 text-center"
+                  className="bg-gradient-to-br from-blue-500/20 to-purple-600/20 backdrop-blur-xl rounded-xl p-3 border border-teal-500/30 text-center"
                 >
-                  <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent block leading-6">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-teal-300 to-emerald-400 bg-clip-text text-transparent block leading-6">
                     3+
                   </span>
                   <p className="text-gray-400 text-xs">Years Exp.</p>
